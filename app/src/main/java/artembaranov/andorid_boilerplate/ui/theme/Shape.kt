@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.dp
  * Created by Artem Baranov on 05.02.2023.
  */
 
-val Shapes = Shapes(
+internal val BoilerplateShapes = Shapes(
     small = RoundedCornerShape(4.dp),
     medium = RoundedCornerShape(4.dp),
     large = RoundedCornerShape(0.dp)
