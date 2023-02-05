@@ -5,21 +5,20 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 /**
  * Created by Artem Baranov on 05.02.2023.
  */
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = Color.ExampleColor1,
+    primaryVariant = Color.ExampleColor2,
 )
 
 private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = Color.ExampleColor2,
+    primaryVariant = Color.ExampleColor1,
 
     /* Other default colors to override
     background = Color.White,
@@ -32,7 +31,7 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun MyApplicationTheme(
+fun BoilerplateTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
@@ -44,8 +43,8 @@ fun MyApplicationTheme(
 
     MaterialTheme(
         colors = colors,
-        typography = Typography,
-        shapes = Shapes,
+        typography = BoilerplateTypography,
+        shapes = BoilerplateShapes,
         content = content
     )
 }
