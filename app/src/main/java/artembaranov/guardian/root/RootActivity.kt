@@ -1,13 +1,13 @@
-package artembaranov.andorid_boilerplate.root
+package artembaranov.guardian.root
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import artembaranov.andorid_boilerplate.ui.navigation.BOILERPLATE_SCREEN_1
-import artembaranov.andorid_boilerplate.ui.navigation.navGraph
-import artembaranov.andorid_boilerplate.ui.theme.BoilerplateTheme
+import artembaranov.guardian.ui.navigation.HOME_SCREEN
+import artembaranov.guardian.ui.navigation.navGraph
+import artembaranov.guardian.ui.theme.GuardianTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,12 +17,12 @@ class RootActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            BoilerplateTheme {
+            GuardianTheme {
                 val navController = rememberNavController()
 
                 NavHost(
                     navController = navController,
-                    startDestination = BOILERPLATE_SCREEN_1 ,
+                    startDestination = HOME_SCREEN,
                 ){
                     navGraph(navController)
                 }

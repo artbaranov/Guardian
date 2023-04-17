@@ -1,4 +1,4 @@
-package artembaranov.andorid_boilerplate.ui.theme
+package artembaranov.guardian.ui.theme
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
@@ -12,7 +12,7 @@ val Color.Companion.ExampleColor2: Color
     get() = Color(0xFF21DCD9)
 
 @Stable
-class BoilerplateColors(
+class GuardianColors(
     primary: Color,
     lightThemeEnabled: Boolean
 ) {
@@ -25,18 +25,18 @@ class BoilerplateColors(
     fun copy(
         primary: Color = this.primary,
         lightThemeEnabled: Boolean = this.lightThemeEnabled
-    ): BoilerplateColors = BoilerplateColors(
+    ): GuardianColors = GuardianColors(
         primary,
         lightThemeEnabled,
     )
 }
 
-internal fun boilerplateLightColors(): BoilerplateColors = BoilerplateColors(
+internal fun guardianLightColors(): GuardianColors = GuardianColors(
     primary = Color.ExampleColor1,
     lightThemeEnabled = true
 )
 
-internal fun boilerplateDarkColors(): BoilerplateColors = BoilerplateColors(
+internal fun guardianDarkColors(): GuardianColors = GuardianColors(
     primary = Color.ExampleColor2,
     lightThemeEnabled = false
 )

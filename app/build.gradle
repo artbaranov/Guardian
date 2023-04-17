@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'artembaranov.andorid_boilerplate'
+    namespace 'artembaranov.guardian'
     compileSdk 33
 
     defaultConfig {
-        applicationId "artembaranov.andorid_boilerplate"
+        applicationId "artembaranov.guardian"
         minSdk 21
         targetSdk 33
         versionCode 1

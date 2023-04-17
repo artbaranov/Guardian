@@ -1,4 +1,4 @@
-package artembaranov.andorid_boilerplate
+package artembaranov.guardian
 
 import org.junit.Test
 

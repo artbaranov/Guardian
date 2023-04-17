@@ -1,4 +1,4 @@
-package artembaranov.andorid_boilerplate.application
+package artembaranov.guardian.application
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
@@ -7,4 +7,4 @@ import dagger.hilt.android.HiltAndroidApp
  * Created by Artem Baranov on 05.02.2023.
  */
 @HiltAndroidApp
-class Application : Application()
+class GuardianApplication : Application()

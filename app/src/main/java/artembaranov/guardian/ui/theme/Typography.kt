@@ -1,4 +1,4 @@
-package artembaranov.andorid_boilerplate.ui.theme
+package artembaranov.guardian.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
@@ -12,6 +12,6 @@ private val LargeTitle = TextStyle(
     fontSize = 50.sp
 )
 
-internal val BoilerplateTypography = Typography(
+internal val GuardianTypography = Typography(
     h2 = LargeTitle,
 )
