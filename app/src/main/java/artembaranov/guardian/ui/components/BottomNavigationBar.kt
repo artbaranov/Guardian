@@ -3,6 +3,7 @@ package artembaranov.guardian.ui.components
 import androidx.compose.foundation.Image
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,10 +20,12 @@ fun BottomNavigationBar(navController: NavController, navigationItems: List<Scre
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
         navigationItems.forEach { screen ->
+            val selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true
+
             BottomNavigationItem(
-                icon = { Image(imageVector = screen.imageVector, contentDescription = null) },
+                icon = { Icon(imageVector = screen.imageVector, contentDescription = null) },
                 label = { Text(stringResource(screen.stringId)) },
-                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                selected = selected,
                 onClick = {
                     navController.navigate(screen.route) {
                         popUpTo(navController.graph.findStartDestination().id) {
