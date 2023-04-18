@@ -19,6 +19,7 @@ fun BottomNavigationBar(navController: NavController, navigationItems: List<Scre
     BottomNavigation {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
+
         navigationItems.forEach { screen ->
             val selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true
 
