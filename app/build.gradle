@@ -31,6 +31,8 @@ android {
     }
 
     compileOptions {
+        coreLibraryDesugaringEnabled = true
+
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -41,6 +43,8 @@ android {
 }
 
 dependencies {
+    def desugar_version = '1.1.5'
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:$desugar_version")
 
     // Coroutines
     def coroutines_version = "1.6.1"

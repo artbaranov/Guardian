@@ -6,7 +6,8 @@ data class Threat(
     val id: Long,
     val name: String,
     val date: ZonedDateTime,
-    val description: String,
-    val threatSources: ThreatSource,
-    val threatConsequences: ThreatConsequence
+    val shortDescription: String,
+    val fullDescription: String,
+    val threatSources: List<ThreatSource>,
+    val threatConsequences: List<ThreatConsequence>,
 )

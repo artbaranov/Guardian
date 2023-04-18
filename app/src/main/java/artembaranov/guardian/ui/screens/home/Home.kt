@@ -12,5 +12,5 @@ fun Home(
 ) {
     val uiState = viewModel.uiState
 
-    ThreatList(threats = uiState.threats, modifier = modifier.fillMaxSize())
+    ThreatList(threats = uiState.threats, modifier = modifier.fillMaxSize(), onThreatClicked = { })
 }
