@@ -10,19 +10,18 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import artembaranov.guardian.R
 import artembaranov.guardian.ui.screens.home.Home
-import artembaranov.guardian.ui.screens.settings.Settings
 
 fun NavGraphBuilder.navGraph(
     navController: NavController,
 ) {
     composable(Screen.Home.route) { Home() }
-    composable(Screen.Settings.route) { Settings() }
+//    composable(Screen.Settings.route) { Settings() }
 }
 
 sealed class Screen(val route: String, @StringRes val stringId: Int, val imageVector: ImageVector) {
     object Home : Screen(HOME, R.string.bottom_navigation_item_home, Icons.Filled.Home)
-    object Settings : Screen(SETTINGS, R.string.bottom_navigation_item_settings, Icons.Filled.Settings)
+//    object Settings : Screen(SETTINGS, R.string.bottom_navigation_item_settings, Icons.Filled.Settings)
 }
 
 const val HOME = "HOME"
-const val SETTINGS = "SETTINGS"
+//const val SETTINGS = "SETTINGS"
