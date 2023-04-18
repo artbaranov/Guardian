@@ -1,27 +1,22 @@
 package artembaranov.guardian.ui.navigation
 
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import artembaranov.guardian.R
 import artembaranov.guardian.ui.screens.home.Home
+import artembaranov.guardian.ui.screens.settings.Settings
 
 fun NavGraphBuilder.navGraph(
     navController: NavController,
 ) {
-    composable(HOME) {
-        Home(modifier = Modifier.fillMaxSize())
-    }
+    composable(Screen.Home.route) { Home() }
+    composable(Screen.Settings.route) { Settings() }
 }
 
 sealed class Screen(val route: String, @StringRes val stringId: Int, val imageVector: ImageVector) {
