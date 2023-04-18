@@ -1,6 +1,5 @@
 package artembaranov.guardian.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
