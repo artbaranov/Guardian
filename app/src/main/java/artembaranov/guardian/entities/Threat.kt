@@ -9,5 +9,6 @@ data class Threat(
     val shortDescription: String,
     val fullDescription: String,
     val threatSources: List<ThreatSource>,
+    val objectsOfInfluence: List<ObjectOfInfluence>,
     val threatConsequences: List<ThreatConsequence>,
 )

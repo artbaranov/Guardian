@@ -1,5 +1,6 @@
 package artembaranov.guardian.ui.previewValues
 
+import artembaranov.guardian.entities.ObjectOfInfluence
 import artembaranov.guardian.entities.Threat
 import artembaranov.guardian.entities.ThreatConsequence
 import artembaranov.guardian.entities.ThreatSource
@@ -16,7 +17,9 @@ val previewThreat = Threat(
     threatSources = listOf(
         ThreatSource("Внешний нарушитель со средним потенциалом"),
         ThreatSource("Внутренний нарушитель со средним потенциалом")
-    ), threatConsequences = listOf(
+    ),
+    objectsOfInfluence = listOf(ObjectOfInfluence("Ресурсные центры грид-системы")),
+    threatConsequences = listOf(
         ThreatConsequence("Нарушение конфиденциальности"),
         ThreatConsequence("Нарушение целостности"),
         ThreatConsequence("Нарушение доступности"),
