@@ -31,21 +31,12 @@ class RootActivity : ComponentActivity() {
 
                 val items = listOf(
                     Screen.Home,
-                    Screen.Settings,
+//                    Screen.Settings,
                 )
 
                 Scaffold(
                     bottomBar = {
                         BottomNavigationBar(navController = navController, navigationItems = items)
-                    },
-                    topBar = {
-                        val navBackStackEntry by navController.currentBackStackEntryAsState()
-                        val currentDestination = navBackStackEntry?.destination
-                        if (currentDestination?.route == Screen.Home.route) {
-                            TopAppBar(modifier = Modifier.background(Color.Black)) {
-
-                            }
-                        }
                     }
                 ) { innerPadding ->
                     NavHost(navController, startDestination = Screen.Home.route, Modifier.padding(innerPadding)) {
