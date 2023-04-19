@@ -10,11 +10,11 @@ import artembaranov.guardian.entities.Threat
 @Composable
 fun ThreatList(
     threats: List<Threat>, modifier: Modifier = Modifier,
-    onThreatClicked: () -> Unit
+    onThreatClicked: (Threat) -> Unit
 ) {
     LazyColumn(modifier = modifier) {
         items(threats) { threat ->
-            ThreatItem(threat, Modifier.fillMaxWidth(), onThreatClicked)
+            ThreatItem(threat, Modifier.fillMaxWidth()) { onThreatClicked(threat) }
         }
     }
 }
