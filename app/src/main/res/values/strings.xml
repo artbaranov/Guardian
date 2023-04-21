@@ -8,4 +8,10 @@
 
     // Threat screen
     <string name="threat_screen_headline">Threat</string>
+
+    // Threat details screen
+    <string name="threat_details_full_description_section_title">Full description:</string>
+    <string name="threat_details_threat_sources_section_title">Threat sources:</string>
+    <string name="threat_details_threat_consequence_section_title">Threat Consequence:</string>
+    <string name="threat_details_objects_of_influence_section_title">Objects of influence:</string>
 </resources>
