@@ -101,6 +101,11 @@ dependencies {
 
     // Espresso
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // Gson
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 }
 
 kapt {
