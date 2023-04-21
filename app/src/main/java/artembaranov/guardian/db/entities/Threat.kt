@@ -1,4 +1,4 @@
-package artembaranov.guardian.databaseModule.entities
+package artembaranov.guardian.db.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

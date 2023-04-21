@@ -1,4 +1,4 @@
-package artembaranov.guardian.databaseModule.converters
+package artembaranov.guardian.db.converters
 
 import androidx.room.TypeConverter
 import artembaranov.guardian.entities.ObjectOfInfluence
