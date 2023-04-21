@@ -1,6 +1,7 @@
 package artembaranov.guardian.repositories
 
 import artembaranov.guardian.db.dao.ThreatDao
+import artembaranov.guardian.db.mappers.ThreatMapper
 import artembaranov.guardian.entities.Threat
 import javax.inject.Inject
 
@@ -9,29 +10,39 @@ import javax.inject.Inject
  */
 
 interface ThreatRepository {
-    fun loadAll(): List<Threat>
-    fun insert(threat: Threat): Long
-    fun update(threat: Threat)
-    fun delete(threat: Threat)
+    suspend fun loadAll(): List<Threat>
+    suspend fun insert(threat: Threat)
+    suspend fun update(threat: Threat)
+    suspend fun delete(threat: Threat)
 }
 
 class ThreatRepositoryImpl @Inject constructor(
     private val threatDao: ThreatDao
 ) : ThreatRepository {
 
-    override fun loadAll(): List<Threat> {
-        return threatDao.getAll()
+    override suspend fun loadAll(): List<Threat> {
+        val threats = threatDao.getAll()
+
+        return threats.map {
+            ThreatMapper.map(it)
+        }
     }
 
-    override fun insert(threat: Threat): Long {
-        return threatDao.insert(threat)
+    override suspend fun insert(threat: Threat) {
+        val dbThreat = ThreatMapper.map(threat)
+
+        threatDao.insert(dbThreat)
     }
 
-    override fun update(threat: Threat) {
-        threatDao.update(threat)
+    override suspend fun update(threat: Threat) {
+        val dpThreat = ThreatMapper.map(threat)
+
+        threatDao.update(dpThreat)
     }
 
-    override fun delete(threat: Threat) {
-        threatDao.delete(threat)
+    override suspend fun delete(threat: Threat) {
+        val dpThreat = ThreatMapper.map(threat)
+
+        threatDao.delete(dpThreat)
     }
 }

@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
@@ -18,7 +18,7 @@ fun NavGraphBuilder.navGraph(
     navController: NavController,
 ) {
     composable(Screen.Home.route) {
-        Home(viewModel = viewModel(),
+        Home(viewModel = hiltViewModel(),
             onThreatClicked = { threat ->
                 navController.navigate("THREAT/${threat.id}")
             }
@@ -28,7 +28,7 @@ fun NavGraphBuilder.navGraph(
         THREAT_DETAILS,
         arguments = listOf(navArgument("threatId") { type = NavType.LongType })
     ) {
-        ThreatDetails(viewModel())
+        ThreatDetails(hiltViewModel())
     }
 }
 

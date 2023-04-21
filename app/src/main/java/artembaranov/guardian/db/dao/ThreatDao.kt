@@ -5,7 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import artembaranov.guardian.entities.Threat
+import artembaranov.guardian.db.entities.Threat
 
 /**
  * Created by Artem Baranov on 21.04.2023.
@@ -13,16 +13,15 @@ import artembaranov.guardian.entities.Threat
 
 @Dao
 interface ThreatDao {
-
     @Query("SELECT * FROM threat")
-    fun getAll(): List<Threat>
+    suspend fun getAll(): List<Threat>
 
     @Insert
-    fun insert(threat: Threat): Long
+    suspend fun insert(threat: Threat)
 
     @Delete
-    fun delete(threat: Threat)
+    suspend fun delete(threat: Threat)
 
     @Update
-    fun update(threat: Threat)
+    suspend fun update(threat: Threat)
 }

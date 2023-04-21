@@ -10,33 +10,31 @@ import artembaranov.guardian.db.entities.Threat as dbThreat
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
-object TransactionMapper {
+object ThreatMapper {
     fun map(dbThreat: dbThreat): Threat {
 
         return Threat(
             id = dbThreat.id,
             name = dbThreat.name,
-
-            createdAt = ZonedDateTime.ofInstant(dbTransaction.createdAt, ZoneId.systemDefault()),
+            date = ZonedDateTime.ofInstant(dbThreat.date, ZoneId.systemDefault()),
+            shortDescription = dbThreat.shortDescription,
+            fullDescription = dbThreat.fullDescription,
+            threatSources = dbThreat.threatSources,
+            objectsOfInfluence = dbThreat.objectsOfInfluence,
+            threatConsequences = dbThreat.threatConsequences,
         )
     }
 
-    fun map(transaction: Transaction): dbTransaction {
-        return if (transaction.isPersistent) {
-            dbTransaction(
-                amount = transaction.amount,
-                comment = transaction.comment,
-                createdAt = transaction.createdAt.toInstant(),
-                categoryId = transaction.category?.id,
-                id = transaction.id
-            )
-        } else {
-            dbTransaction(
-                amount = transaction.amount,
-                comment = transaction.comment,
-                createdAt = transaction.createdAt.toInstant(),
-                categoryId = transaction.category?.id,
-            )
-        }
+    fun map(threat: Threat): dbThreat {
+        return dbThreat(
+            id = threat.id,
+            name = threat.name,
+            date = threat.date.toInstant(),
+            shortDescription = threat.shortDescription,
+            fullDescription = threat.fullDescription,
+            threatSources = threat.threatSources,
+            objectsOfInfluence = threat.objectsOfInfluence,
+            threatConsequences = threat.threatConsequences,
+        )
     }
 }
