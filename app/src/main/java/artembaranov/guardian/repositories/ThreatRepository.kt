@@ -14,6 +14,7 @@ interface ThreatRepository {
     suspend fun insert(threat: Threat)
     suspend fun update(threat: Threat)
     suspend fun delete(threat: Threat)
+    suspend fun loadById(id: Long): Threat
 }
 
 class ThreatRepositoryImpl @Inject constructor(
@@ -44,5 +45,11 @@ class ThreatRepositoryImpl @Inject constructor(
         val dpThreat = ThreatMapper.map(threat)
 
         threatDao.delete(dpThreat)
+    }
+
+    override suspend fun loadById(id: Long): Threat {
+        val threat = ThreatMapper.map(threatDao.loadById(id))
+
+        return threat
     }
 }

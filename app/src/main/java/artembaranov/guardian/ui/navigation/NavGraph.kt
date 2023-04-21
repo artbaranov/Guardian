@@ -1,8 +1,10 @@
 package artembaranov.guardian.ui.navigation
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -13,6 +15,7 @@ import androidx.navigation.navArgument
 import artembaranov.guardian.R
 import artembaranov.guardian.ui.screens.home.Home
 import artembaranov.guardian.ui.screens.threat.ThreatDetails
+import artembaranov.guardian.ui.screens.threat.ThreatDetailsViewModel
 
 fun NavGraphBuilder.navGraph(
     navController: NavController,
@@ -26,9 +29,9 @@ fun NavGraphBuilder.navGraph(
     }
     composable(
         THREAT_DETAILS,
-        arguments = listOf(navArgument("threatId") { type = NavType.LongType })
+        arguments = listOf(navArgument(ThreatDetailsViewModel.SavedStateKeys.THREAT_ID) { type = NavType.LongType })
     ) {
-        ThreatDetails(hiltViewModel())
+        ThreatDetails(modifier = Modifier.fillMaxSize(), viewModel = hiltViewModel())
     }
 }
 

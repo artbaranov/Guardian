@@ -26,7 +26,6 @@ class HomeViewModel @Inject constructor(
         private set
 
     suspend fun onStart() {
-
         loadThreats()
     }
 
