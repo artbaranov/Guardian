@@ -2,11 +2,11 @@ package artembaranov.guardian.ui.screens.threat
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
@@ -28,48 +28,65 @@ fun ThreatDetails(
 ) {
     val uiState = viewModel.uiState
 
-    Column(modifier = modifier.fillMaxSize()) {
-        Title(
-            modifier = Modifier.fillMaxWidth(),
-            text = uiState.name,
-        )
-        DetailsSection(
-            modifier = Modifier.fillMaxWidth(),
-            headline = stringResource(id = R.string.threat_details_full_description_section_title),
-            content = {
-                Text(text = uiState.fullDescription)
-            }
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        DetailsSection(
-            modifier = Modifier.fillMaxWidth(),
-            headline = stringResource(id = R.string.threat_details_threat_sources_section_title),
-            content = {
-                uiState.threatSources.forEach {
-                    Text(text = it.name)
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(start = 25.dp, end = 25.dp)
+    ) {
+        item {
+            Title(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 10.dp),
+                text = uiState.name,
+            )
+        }
+        item {
+            DetailsSection(
+                modifier = Modifier.fillMaxWidth(),
+                headline = stringResource(id = R.string.threat_details_full_description_section_title),
+                content = {
+                    Text(text = uiState.fullDescription)
                 }
-            }
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        DetailsSection(
-            modifier = Modifier.fillMaxWidth(),
-            headline = stringResource(id = R.string.threat_details_threat_consequence_section_title),
-            content = {
-                uiState.threatConsequences.forEach {
-                    Text(text = it.name)
+            )
+        }
+        item {
+            DetailsSection(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 10.dp),
+                headline = stringResource(id = R.string.threat_details_threat_sources_section_title),
+                content = {
+                    uiState.threatSources.forEach {
+                        Text(text = it.name)
+                    }
                 }
-            }
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        DetailsSection(
-            modifier = Modifier.fillMaxWidth(),
-            headline = stringResource(id = R.string.threat_details_objects_of_influence_section_title),
-            content = {
-                uiState.objectsOfInfluence.forEach {
-                    Text(text = it.name)
+            )
+        }
+        item {
+            DetailsSection(
+                modifier = Modifier.fillMaxWidth(),
+                headline = stringResource(id = R.string.threat_details_threat_consequence_section_title),
+                content = {
+                    uiState.threatConsequences.forEach {
+                        Text(text = it.name)
+                    }
                 }
-            }
-        )
+            )
+        }
+        item {
+            DetailsSection(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 10.dp),
+                headline = stringResource(id = R.string.threat_details_objects_of_influence_section_title),
+                content = {
+                    uiState.objectsOfInfluence.forEach {
+                        Text(text = it.name)
+                    }
+                }
+            )
+        }
     }
 
     LaunchedEffect(Unit) {
