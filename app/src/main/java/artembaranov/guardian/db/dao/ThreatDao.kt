@@ -24,4 +24,9 @@ interface ThreatDao {
 
     @Update
     suspend fun update(threat: Threat)
+
+    @Query(
+        "SELECT * FROM `threat` WHERE id = :id LIMIT 1"
+    )
+    suspend fun loadById(id: Long): Threat
 }

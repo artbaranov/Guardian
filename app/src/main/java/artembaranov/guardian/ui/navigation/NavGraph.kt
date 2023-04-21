@@ -13,6 +13,7 @@ import androidx.navigation.navArgument
 import artembaranov.guardian.R
 import artembaranov.guardian.ui.screens.home.Home
 import artembaranov.guardian.ui.screens.threat.ThreatDetails
+import artembaranov.guardian.ui.screens.threat.ThreatDetailsViewModel
 
 fun NavGraphBuilder.navGraph(
     navController: NavController,
@@ -26,7 +27,7 @@ fun NavGraphBuilder.navGraph(
     }
     composable(
         THREAT_DETAILS,
-        arguments = listOf(navArgument("threatId") { type = NavType.LongType })
+        arguments = listOf(navArgument(ThreatDetailsViewModel.SavedStateKeys.THREAT_ID) { type = NavType.LongType })
     ) {
         ThreatDetails(hiltViewModel())
     }
