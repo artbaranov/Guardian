@@ -6,6 +6,7 @@ import artembaranov.guardian.entities.ThreatConsequence
 import artembaranov.guardian.entities.ThreatSource
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.time.Instant
 
 /**
  * Created by Artem Baranov on 21.04.2023.
@@ -52,5 +53,15 @@ class ThreatConverter {
         val gson = Gson()
         val type = object : TypeToken<List<ThreatConsequence>>() {}.type
         return gson.fromJson(value, type)
+    }
+
+    @TypeConverter
+    fun fromTimestamp(value: Long?): Instant? {
+        return value?.let { Instant.ofEpochMilli(it) }
+    }
+
+    @TypeConverter
+    fun instantToTimestamp(instant: Instant?): Long? {
+        return instant?.toEpochMilli()
     }
 }

@@ -1,7 +1,7 @@
 package artembaranov.guardian.repositories
 
 import artembaranov.guardian.db.dao.ThreatDao
-import artembaranov.guardian.db.entities.Threat
+import artembaranov.guardian.entities.Threat
 import javax.inject.Inject
 
 /**
