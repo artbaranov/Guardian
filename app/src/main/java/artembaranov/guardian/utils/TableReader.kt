@@ -24,6 +24,7 @@ class ExcelReader @Inject constructor(
     @ApplicationContext private val context: Context
 ) : TableReader {
 
+    // TODO: Refactor this method
     override suspend fun read(fileName: String): List<Threat> {
 
         val workbook = WorkbookFactory.create(context.assets.open(fileName))
@@ -31,35 +32,35 @@ class ExcelReader @Inject constructor(
         val threats = mutableListOf<Threat>()
 
         for (row in sheet) {
-            val id = row.getCell(0)
-            val shortDescription = row.getCell(1)
-            val fullDescription = row.getCell(2)
+            val cellId = row.getCell(0)
+            val cellShortDescription = row.getCell(1)
+            val cellFullDescription = row.getCell(2)
 
-            val threatSources = row.getCell(3)
-            val objectsOfInfluence = row.getCell(4)
-            val privacyViolation = row.getCell(5)
-            val accessibilityViolation = row.getCell(6)
-            val integrityViolation = row.getCell(7)
+            val cellThreatSources = row.getCell(3)
+            val cellObjectsOfInfluence = row.getCell(4)
+            val cellPrivacyViolation = row.getCell(5)
+            val cellAccessibilityViolation = row.getCell(6)
+            val cellIntegrityViolation = row.getCell(7)
 
-            val date = row.getCell(8)
+            val cellDate = row.getCell(8)
 
-            if (cellsInitialized(id, shortDescription, fullDescription)) {
+            if (cellsInitialized(cellId, cellShortDescription, cellFullDescription)) {
 
-                val id = id.numericCellValue.toLong()
+                val id = cellId.numericCellValue.toLong()
                 val name = "УБИ.${id}"
-                val shortDescription = shortDescription.stringCellValue
-                val fullDescription = fullDescription.stringCellValue
+                val shortDescription = cellShortDescription.stringCellValue
+                val fullDescription = cellFullDescription.stringCellValue
 
-                val privacyViolation = privacyViolation.numericCellValue
-                val accessibilityViolation = accessibilityViolation.numericCellValue
-                val integrityViolation = integrityViolation.numericCellValue
+                val privacyViolation = cellPrivacyViolation.numericCellValue
+                val accessibilityViolation = cellAccessibilityViolation.numericCellValue
+                val integrityViolation = cellIntegrityViolation.numericCellValue
 
                 // from(date.dateCellValue.toInstant())
                 val date = ZonedDateTime.now()
 
                 val threatConsequences = createConsequences(privacyViolation, accessibilityViolation, integrityViolation)
-                val threatSources = createThreatSources(threatSources.stringCellValue)
-                val objectsOfInfluence = createObjectsOfInfluence(objectsOfInfluence.stringCellValue)
+                val threatSources = createThreatSources(cellThreatSources.stringCellValue)
+                val objectsOfInfluence = createObjectsOfInfluence(cellObjectsOfInfluence.stringCellValue)
 
                 threats.add(Threat(id, name, date, shortDescription, fullDescription, threatSources, objectsOfInfluence, threatConsequences))
             }
