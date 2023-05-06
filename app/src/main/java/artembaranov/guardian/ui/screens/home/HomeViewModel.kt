@@ -9,6 +9,7 @@ import artembaranov.guardian.di.IODispatcher
 import artembaranov.guardian.di.MainDispatcher
 import artembaranov.guardian.entities.Threat
 import artembaranov.guardian.repositories.ThreatRepository
+import artembaranov.guardian.utils.TableReader
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -17,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val threatRepository: ThreatRepository,
+    private val tableReader: TableReader,
     @MainDispatcher private val uiDispatcher: CoroutineDispatcher,
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
@@ -24,6 +26,12 @@ class HomeViewModel @Inject constructor(
 
     var uiState by mutableStateOf(UiState())
         private set
+
+    init {
+        viewModelScope.launch(ioDispatcher) {
+            val threats = tableReader.read("thrlist.xlsx")
+        }
+    }
 
     suspend fun onStart() {
         loadThreats()
