@@ -32,8 +32,8 @@ class ExcelReader @Inject constructor(
 
         for (row in sheet) {
             val id = row.getCell(0)
-            val name = row.getCell(1)
-            val description = row.getCell(2)
+            val shortDescription = row.getCell(1)
+            val fullDescription = row.getCell(2)
 
             val threatSources = row.getCell(3)
             val objectsOfInfluence = row.getCell(4)
@@ -43,10 +43,12 @@ class ExcelReader @Inject constructor(
 
             val date = row.getCell(8)
 
-            if (cellsInitialized(id, name, description)) {
+            if (cellsInitialized(id, shortDescription, fullDescription)) {
+
                 val id = id.numericCellValue.toLong()
-                val name = name.stringCellValue
-                val description = description.stringCellValue
+                val name = "УБИ.${id}"
+                val shortDescription = shortDescription.stringCellValue
+                val fullDescription = fullDescription.stringCellValue
 
                 val privacyViolation = privacyViolation.numericCellValue
                 val accessibilityViolation = accessibilityViolation.numericCellValue
@@ -59,7 +61,7 @@ class ExcelReader @Inject constructor(
                 val threatSources = createThreatSources(threatSources.stringCellValue)
                 val objectsOfInfluence = createObjectsOfInfluence(objectsOfInfluence.stringCellValue)
 
-                threats.add(Threat(id, name, date, description, description, threatSources, objectsOfInfluence, threatConsequences))
+                threats.add(Threat(id, name, date, shortDescription, fullDescription, threatSources, objectsOfInfluence, threatConsequences))
             }
         }
 
