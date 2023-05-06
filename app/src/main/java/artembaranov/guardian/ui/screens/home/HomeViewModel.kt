@@ -29,7 +29,11 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(ioDispatcher) {
+            if (threatRepository.loadAll().isNotEmpty()) return@launch
+
             val threats = tableReader.read("thrlist.xlsx")
+
+            threatRepository.insertAll(threats)
         }
     }
 

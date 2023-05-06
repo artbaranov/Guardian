@@ -11,6 +11,7 @@ import javax.inject.Inject
 
 interface ThreatRepository {
     suspend fun loadAll(): List<Threat>
+    suspend fun insertAll(threats: List<Threat>)
     suspend fun insert(threat: Threat)
     suspend fun update(threat: Threat)
     suspend fun delete(threat: Threat)
@@ -26,6 +27,16 @@ class ThreatRepositoryImpl @Inject constructor(
 
         return threats.map {
             ThreatMapper.map(it)
+        }
+    }
+
+    override suspend fun insertAll(threats: List<Threat>) {
+        val dpThreats = threats.map {
+            ThreatMapper.map(it)
+        }
+
+        dpThreats.forEach {
+            threatDao.insert(it)
         }
     }
 
