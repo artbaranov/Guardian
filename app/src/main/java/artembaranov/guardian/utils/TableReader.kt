@@ -51,18 +51,30 @@ class ExcelReader @Inject constructor(
                 val shortDescription = cellShortDescription.stringCellValue
                 val fullDescription = cellFullDescription.stringCellValue
 
-                val privacyViolation = cellPrivacyViolation.numericCellValue
-                val accessibilityViolation = cellAccessibilityViolation.numericCellValue
-                val integrityViolation = cellIntegrityViolation.numericCellValue
+                val privacyViolation = cellPrivacyViolation.numericCellValue.toInt()
+                val accessibilityViolation = cellAccessibilityViolation.numericCellValue.toInt()
+                val integrityViolation = cellIntegrityViolation.numericCellValue.toInt()
 
                 // from(date.dateCellValue.toInstant())
                 val date = ZonedDateTime.now()
 
-                val threatConsequences = createConsequences(privacyViolation, accessibilityViolation, integrityViolation)
+                val threatConsequences =
+                    createConsequences(privacyViolation, accessibilityViolation, integrityViolation)
                 val threatSources = createThreatSources(cellThreatSources.stringCellValue)
                 val objectsOfInfluence = createObjectsOfInfluence(cellObjectsOfInfluence.stringCellValue)
 
-                threats.add(Threat(id, name, date, shortDescription, fullDescription, threatSources, objectsOfInfluence, threatConsequences))
+                threats.add(
+                    Threat(
+                        id,
+                        name,
+                        date,
+                        shortDescription,
+                        fullDescription,
+                        threatSources,
+                        objectsOfInfluence,
+                        threatConsequences
+                    )
+                )
             }
         }
 
@@ -76,19 +88,51 @@ class ExcelReader @Inject constructor(
     }
 
     private fun createThreatSources(stringCellValue: String?): List<ThreatSource> {
-        return emptyList()
+        if (stringCellValue == null) return emptyList()
+
+        val threatSources = mutableListOf<ThreatSource>()
+
+        val sources = stringCellValue.split(";")
+
+        sources.forEach {
+            threatSources.add(ThreatSource(it))
+        }
+
+        return threatSources
     }
 
 
     private fun createObjectsOfInfluence(stringCellValue: String?): List<ObjectOfInfluence> {
-        return emptyList()
+        if (stringCellValue == null) return emptyList()
+
+        val objectsOfInfluence = mutableListOf<ObjectOfInfluence>()
+
+        val sources = stringCellValue.split(";")
+
+        sources.forEach {
+            objectsOfInfluence.add(ObjectOfInfluence(it))
+        }
+
+        return objectsOfInfluence
     }
 
     private fun createConsequences(
-        privacyViolation: Double,
-        accessibilityViolation: Double,
-        integrityViolation: Double
+        privacyViolation: Int,
+        accessibilityViolation: Int,
+        integrityViolation: Int
     ): List<ThreatConsequence> {
-        return emptyList()
+        val consequences = mutableListOf<ThreatConsequence>()
+
+        if (privacyViolation == 1) {
+            consequences.add(ThreatConsequence("Нарушение конфиденциальности"))
+        }
+        if (accessibilityViolation == 1) {
+            consequences.add(ThreatConsequence("Нарушение доступности"))
+        }
+        if (integrityViolation == 1) {
+            consequences.add(ThreatConsequence("Нарушение целостности"))
+        }
+
+        return consequences
     }
 }
