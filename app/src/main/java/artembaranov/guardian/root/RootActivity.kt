@@ -71,20 +71,6 @@ class RootActivity : ComponentActivity() {
                         ) {
                             BottomNavigationBar(navController = navController, navigationItems = items)
                         }
-                    },
-                    topBar = {
-                        AnimatedVisibility(
-                            visible = topBarVisible.value,
-                            enter = slideInVertically(initialOffsetY = { -it }),
-                            exit = slideOutVertically(targetOffsetY = { -it }),
-                        ) {
-                            TopAppBar(
-                                contentPadding = PaddingValues(end = 25.dp),
-                            ) {
-                                Spacer(modifier = Modifier.weight(1f))
-                                Icon(modifier = Modifier, imageVector = Icons.Filled.Search, contentDescription = null)
-                            }
-                        }
                     }
                 ) { innerPadding ->
                     NavHost(navController, startDestination = Screen.Home.route, Modifier.padding(innerPadding)) {
