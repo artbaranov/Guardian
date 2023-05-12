@@ -22,23 +22,38 @@ class HomeViewModel @Inject constructor(
     @MainDispatcher private val uiDispatcher: CoroutineDispatcher,
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
-    data class UiState(val threats: List<Threat> = emptyList())
+    data class UiState(
+        val threats: List<Threat> = emptyList(),
+        val foundThreats: List<Threat> = emptyList(),
+        val searchQuery: String = "",
+    )
 
     var uiState by mutableStateOf(UiState())
         private set
 
     init {
         viewModelScope.launch(ioDispatcher) {
-            if (threatRepository.loadAll().isEmpty()) {
-                val threats = tableReader.read("thrlist.xlsx")
-
-                threatRepository.insertAll(threats)
-            }
+            updateRepository()
 
             loadThreats()
         }
     }
 
+    suspend fun showFoundThreats() {
+
+    }
+
+    fun updateSearchQuery(text: String) {
+        uiState = uiState.copy(searchQuery = text)
+    }
+
+    private suspend fun updateRepository() {
+        if (threatRepository.loadAll().isEmpty()) {
+            val threats = tableReader.read("thrlist.xlsx")
+
+            threatRepository.insertAll(threats)
+        }
+    }
 
     private suspend fun loadThreats() {
         viewModelScope.launch(ioDispatcher) {
