@@ -39,13 +39,27 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    suspend fun showFoundThreats() {
+    fun updateSearchQuery(query: String) {
+        uiState = uiState.copy(searchQuery = query)
 
+        updateFoundThreatsWith(query)
     }
 
-    fun updateSearchQuery(text: String) {
-        uiState = uiState.copy(searchQuery = text)
+    private fun updateFoundThreatsWith(query: String) {
+        val foundThreats = mutableListOf<Threat>()
+
+        uiState.threats.forEach {
+            val query = query.lowercase()
+
+            val name = it.name.lowercase()
+            val shortDescription = it.shortDescription.lowercase()
+
+            if (name.contains(query) || shortDescription.contains(query)) foundThreats.add(it)
+        }
+
+        uiState = uiState.copy(foundThreats = foundThreats)
     }
+
 
     private suspend fun updateRepository() {
         if (threatRepository.loadAll().isEmpty()) {

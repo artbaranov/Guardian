@@ -56,8 +56,16 @@ fun HomeImpl(
             onTextChanged = uiFlow.onSearchQueryChanged
         )
 
+        val searchQuery = uiState.searchQuery
+
         ThreatList(
-            threats = uiState.threats, modifier = Modifier.fillMaxSize(), onThreatClicked = uiFlow.onThreatClicked
+            threats = if (searchQuery.isEmpty()) {
+                uiState.threats
+            } else {
+                uiState.foundThreats
+            },
+            modifier = Modifier.fillMaxSize(),
+            onThreatClicked = uiFlow.onThreatClicked
         )
     }
 }
