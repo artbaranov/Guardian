@@ -22,23 +22,52 @@ class HomeViewModel @Inject constructor(
     @MainDispatcher private val uiDispatcher: CoroutineDispatcher,
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
-    data class UiState(val threats: List<Threat> = emptyList())
+    data class UiState(
+        val threats: List<Threat> = emptyList(),
+        val foundThreats: List<Threat> = emptyList(),
+        val searchQuery: String = "",
+    )
 
     var uiState by mutableStateOf(UiState())
         private set
 
     init {
         viewModelScope.launch(ioDispatcher) {
-            if (threatRepository.loadAll().isEmpty()) {
-                val threats = tableReader.read("thrlist.xlsx")
-
-                threatRepository.insertAll(threats)
-            }
+            updateRepository()
 
             loadThreats()
         }
     }
 
+    fun updateSearchQuery(query: String) {
+        uiState = uiState.copy(searchQuery = query)
+
+        updateFoundThreatsWith(query)
+    }
+
+    private fun updateFoundThreatsWith(query: String) {
+        val foundThreats = mutableListOf<Threat>()
+
+        uiState.threats.forEach {
+            val query = query.lowercase()
+
+            val name = it.name.lowercase()
+            val shortDescription = it.shortDescription.lowercase()
+
+            if (name.contains(query) || shortDescription.contains(query)) foundThreats.add(it)
+        }
+
+        uiState = uiState.copy(foundThreats = foundThreats)
+    }
+
+
+    private suspend fun updateRepository() {
+        if (threatRepository.loadAll().isEmpty()) {
+            val threats = tableReader.read("thrlist.xlsx")
+
+            threatRepository.insertAll(threats)
+        }
+    }
 
     private suspend fun loadThreats() {
         viewModelScope.launch(ioDispatcher) {
