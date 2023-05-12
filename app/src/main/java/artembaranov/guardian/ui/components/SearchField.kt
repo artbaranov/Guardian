@@ -1,11 +1,11 @@
 package artembaranov.guardian.ui.components
 
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -30,6 +30,9 @@ fun SearchField(
         onValueChange = onTextChanged,
         trailingIcon = {
             Icon(imageVector = Icons.Default.Search, contentDescription = null)
+        },
+        leadingIcon = {
+            Icon(imageVector = Icons.Default.Menu, contentDescription = null)
         },
         singleLine = true,
         maxLines = 1,
