@@ -14,12 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import artembaranov.guardian.R
+import artembaranov.guardian.ui.theme.GuardianTheme
 
 @Composable
 fun ThreatDetails(
@@ -31,6 +31,7 @@ fun ThreatDetails(
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
+            .background(color = GuardianTheme.colors.background)
             .padding(start = 25.dp, end = 25.dp)
     ) {
         item {
@@ -46,7 +47,7 @@ fun ThreatDetails(
                 modifier = Modifier.fillMaxWidth(),
                 headline = stringResource(id = R.string.threat_details_full_description_section_title),
                 content = {
-                    Text(text = uiState.fullDescription)
+                    Text(modifier = it, text = uiState.fullDescription, color = GuardianTheme.colors.primaryVariant1)
                 }
             )
         }
@@ -56,9 +57,9 @@ fun ThreatDetails(
                     .fillMaxWidth()
                     .padding(vertical = 10.dp),
                 headline = stringResource(id = R.string.threat_details_threat_sources_section_title),
-                content = {
-                    uiState.threatSources.forEach {
-                        Text(text = it.name)
+                content = { modifier ->
+                    uiState.threatSources.forEach { threat ->
+                        Text(modifier = modifier, text = threat.name, color = GuardianTheme.colors.primaryVariant1)
                     }
                 }
             )
@@ -67,9 +68,13 @@ fun ThreatDetails(
             DetailsSection(
                 modifier = Modifier.fillMaxWidth(),
                 headline = stringResource(id = R.string.threat_details_threat_consequence_section_title),
-                content = {
-                    uiState.threatConsequences.forEach {
-                        Text(text = it.name)
+                content = { modifier ->
+                    uiState.threatConsequences.forEach { threatConsequence ->
+                        Text(
+                            modifier = modifier,
+                            text = threatConsequence.name,
+                            color = GuardianTheme.colors.primaryVariant1
+                        )
                     }
                 }
             )
@@ -80,9 +85,13 @@ fun ThreatDetails(
                     .fillMaxWidth()
                     .padding(vertical = 10.dp),
                 headline = stringResource(id = R.string.threat_details_objects_of_influence_section_title),
-                content = {
-                    uiState.objectsOfInfluence.forEach {
-                        Text(text = it.name)
+                content = { modifier ->
+                    uiState.objectsOfInfluence.forEach { objectOfInfluence ->
+                        Text(
+                            modifier = modifier,
+                            text = objectOfInfluence.name,
+                            color = GuardianTheme.colors.primaryVariant1
+                        )
                     }
                 }
             )
@@ -103,20 +112,26 @@ private fun Title(
         modifier = modifier,
         text = text,
         textAlign = TextAlign.Center,
-        fontSize = 24.sp
+        fontSize = 24.sp,
+        color = GuardianTheme.colors.primaryVariant1
     )
 }
 
 @Composable
-private fun DetailsSection(modifier: Modifier, headline: String, content: @Composable () -> Unit) {
+private fun DetailsSection(modifier: Modifier, headline: String, content: @Composable (Modifier) -> Unit) {
     Column(
         modifier = modifier
             .clip(RoundedCornerShape(10.dp))
-            .background(Color(0xFF7DCEA0), shape = RoundedCornerShape(10.dp))
-            .padding(5.dp),
+            .background(color = GuardianTheme.colors.onSurfaceVariant1, shape = RoundedCornerShape(10.dp))
+            .padding(10.dp),
     ) {
-        Text(text = headline, fontSize = 18.sp)
-        Divider(color = Color.Black.copy(alpha = 0.5f), modifier = Modifier.height(1.dp))
-        content()
+        Text(
+            modifier = Modifier.padding(bottom = 3.dp),
+            text = headline,
+            fontSize = 20.sp,
+            color = GuardianTheme.colors.primaryVariant1
+        )
+        Divider(color = GuardianTheme.colors.primary, modifier = Modifier.height(1.dp))
+        content(modifier.padding(top = 5.dp))
     }
 }

@@ -31,11 +31,16 @@ val Color.Companion.Gallery: Color
 @Stable
 class GuardianColors(
     primary: Color,
+    primaryVariant1: Color,
     background: Color,
     onSurface: Color,
+    onSurfaceVariant1: Color,
     lightThemeEnabled: Boolean
 ) {
     var primary by mutableStateOf(primary, structuralEqualityPolicy())
+        internal set
+
+    var primaryVariant1 by mutableStateOf(primaryVariant1, structuralEqualityPolicy())
         internal set
 
     var background by mutableStateOf(background, structuralEqualityPolicy())
@@ -44,32 +49,43 @@ class GuardianColors(
     var onSurface by mutableStateOf(onSurface, structuralEqualityPolicy())
         internal set
 
+    var onSurfaceVariant1 by mutableStateOf(onSurfaceVariant1, structuralEqualityPolicy())
+        internal set
+
     var lightThemeEnabled by mutableStateOf(lightThemeEnabled, structuralEqualityPolicy())
         internal set
 
     fun copy(
         primary: Color = this.primary,
+        primaryVariant1: Color = this.primaryVariant1,
         background: Color = this.background,
         onSurface: Color = this.onSurface,
+        onSurfaceVariant1: Color = this.onSurfaceVariant1,
         lightThemeEnabled: Boolean = this.lightThemeEnabled,
     ): GuardianColors = GuardianColors(
         primary,
+        primaryVariant1,
         background,
         onSurface,
+        onSurfaceVariant1,
         lightThemeEnabled,
     )
 }
 
 internal fun guardianLightColors(): GuardianColors = GuardianColors(
     primary = Color.MineShaft,
+    primaryVariant1 = Color.MineShaft,
     background = Color.Gallery,
     onSurface = Color.LightGray,
+    onSurfaceVariant1 = Color.Alto,
     lightThemeEnabled = true
 )
 
 internal fun guardianDarkColors(): GuardianColors = GuardianColors(
     primary = Color.PhilippineGray,
+    primaryVariant1 = Color.Alto,
     background = Color.MineShaftLight,
     onSurface = Color.LightGray,
+    onSurfaceVariant1 = Color.MineShaft,
     lightThemeEnabled = false
 )
