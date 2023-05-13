@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import artembaranov.guardian.entities.Threat
 import artembaranov.guardian.ui.previewValues.previewThreat
+import artembaranov.guardian.ui.theme.GuardianTheme
 
 @Composable
 fun ThreatItem(
@@ -32,12 +33,14 @@ fun ThreatItem(
                 text = threat.name,
                 fontSize = 18.sp,
                 fontFamily = FontFamily.SansSerif,
+                color = GuardianTheme.colors.primary
             )
 
             Text(
                 text = threat.shortDescription,
                 fontSize = 12.sp,
-                fontFamily = FontFamily.SansSerif
+                fontFamily = FontFamily.SansSerif,
+                color = GuardianTheme.colors.primary
             )
         }
     }

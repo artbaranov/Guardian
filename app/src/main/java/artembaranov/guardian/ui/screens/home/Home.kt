@@ -1,5 +1,6 @@
 package artembaranov.guardian.ui.screens.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,10 +15,10 @@ import androidx.compose.ui.unit.dp
 import artembaranov.guardian.entities.Threat
 import artembaranov.guardian.ui.components.SearchField
 import artembaranov.guardian.ui.screens.home.views.ThreatList
+import artembaranov.guardian.ui.theme.GuardianTheme
 
 @Composable
 fun Home(
-    modifier: Modifier = Modifier,
     onThreatClicked: (Threat) -> Unit,
     viewModel: HomeViewModel
 ) {
@@ -29,7 +30,11 @@ fun Home(
         onSearchQueryChanged = viewModel::updateSearchQuery
     )
 
-    HomeImpl(modifier = modifier, uiState = uiState, uiFlow = uiFlow)
+    HomeImpl(
+        modifier = Modifier.background(color = GuardianTheme.colors.background),
+        uiState = uiState,
+        uiFlow = uiFlow
+    )
 }
 
 @Composable
