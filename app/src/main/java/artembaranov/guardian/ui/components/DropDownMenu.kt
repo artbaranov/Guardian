@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import artembaranov.guardian.ui.theme.GuardianTheme
 
 /**
  * Created by Artem Baranov on 13.05.2023.
@@ -41,7 +42,8 @@ fun DropDownMenu(modifier: Modifier = Modifier) {
         IconButton(onClick = { expanded = !expanded }) {
             Icon(
                 imageVector = Icons.Default.Menu,
-                contentDescription = "More"
+                contentDescription = "More",
+                tint = GuardianTheme.colors.primary
             )
         }
 

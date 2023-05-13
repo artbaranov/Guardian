@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import artembaranov.guardian.ui.theme.GuardianTheme
 
 /**
  * Created by Artem Baranov on 13.05.2023.
@@ -29,7 +30,10 @@ fun SearchField(
         value = text,
         onValueChange = onTextChanged,
         trailingIcon = {
-            Icon(imageVector = Icons.Default.Search, contentDescription = null)
+            Icon(
+                imageVector = Icons.Default.Search, contentDescription = null,
+                tint = GuardianTheme.colors.primary
+            )
         },
         leadingIcon = {
             DropDownMenu()
@@ -37,6 +41,8 @@ fun SearchField(
         singleLine = true,
         maxLines = 1,
         colors = TextFieldDefaults.textFieldColors(
+            textColor = GuardianTheme.colors.primary,
+            cursorColor = GuardianTheme.colors.primary,
             disabledTextColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
