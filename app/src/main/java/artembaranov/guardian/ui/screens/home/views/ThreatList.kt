@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.FloatingActionButton
@@ -23,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import artembaranov.guardian.entities.Threat
+import artembaranov.guardian.ui.theme.GuardianTheme
 import kotlinx.coroutines.launch
 
 @Composable
@@ -31,9 +33,8 @@ fun ThreatList(
     onThreatClicked: (Threat) -> Unit
 ) {
     val listState = rememberLazyListState()
-    val coroutineScope = rememberCoroutineScope()
 
-    var a by remember { mutableStateOf(0) }
+    var lastVisibleItemPosition by remember { mutableStateOf(0) }
 
     Box(modifier = modifier) {
         LazyColumn(
@@ -43,27 +44,42 @@ fun ThreatList(
             itemsIndexed(threats) { index, threat ->
                 ThreatItem(threat, Modifier.fillMaxWidth()) { onThreatClicked(threat) }
 
-                a = index
+                lastVisibleItemPosition = index
             }
         }
 
-        AnimatedVisibility(
-            enter = fadeIn(),
-            exit = fadeOut(),
-            visible = a >= 20,
+        ScrollToTopButton(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(bottom = 15.dp, end = 15.dp)
-        ) {
-            FloatingActionButton(
-                onClick = {
-                    coroutineScope.launch {
-                        listState.animateScrollToItem(index = 0)
-                    }
+                .padding(bottom = 15.dp, end = 15.dp),
+            visible = lastVisibleItemPosition >= 30,
+            state = listState
+        )
+    }
+}
+
+@Composable
+private fun ScrollToTopButton(modifier: Modifier, visible: Boolean, state: LazyListState) {
+    val coroutineScope = rememberCoroutineScope()
+
+    AnimatedVisibility(
+        enter = fadeIn(),
+        exit = fadeOut(),
+        visible = visible,
+        modifier = modifier
+    ) {
+        FloatingActionButton(
+            backgroundColor = GuardianTheme.colors.onSurface,
+            onClick = {
+                coroutineScope.launch {
+                    state.animateScrollToItem(index = 0)
                 }
-            ) {
-                Icon(imageVector = Icons.Default.KeyboardArrowUp, contentDescription = null)
             }
+        ) {
+            Icon(
+                imageVector = Icons.Default.KeyboardArrowUp,
+                contentDescription = null
+            )
         }
     }
 }

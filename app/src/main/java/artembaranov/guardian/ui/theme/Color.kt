@@ -1,22 +1,55 @@
 package artembaranov.guardian.ui.theme
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.graphics.Color
 
-@Stable
-val Color.Companion.ExampleColor1: Color
-    get() = Color(0xFF008493)
 
 @Stable
-val Color.Companion.ExampleColor2: Color
-    get() = Color(0xFF21DCD9)
+val Color.Companion.MineShaft: Color
+    get() = Color(0xFF222222)
+
+@Stable
+val Color.Companion.MineShaftLight: Color
+    get() = Color(0xFF2B2B2B)
+
+@Stable
+val Color.Companion.PhilippineGray: Color
+    get() = Color(0xFF909090)
+
+@Stable
+val Color.Companion.Alto: Color
+    get() = Color(0xFFDDDDDD)
+
+@Stable
+val Color.Companion.Gallery: Color
+    get() = Color(0xFFEEEEEE)
 
 @Stable
 class GuardianColors(
     primary: Color,
+    primaryVariant1: Color,
+    background: Color,
+    onSurface: Color,
+    onSurfaceVariant1: Color,
     lightThemeEnabled: Boolean
 ) {
     var primary by mutableStateOf(primary, structuralEqualityPolicy())
+        internal set
+
+    var primaryVariant1 by mutableStateOf(primaryVariant1, structuralEqualityPolicy())
+        internal set
+
+    var background by mutableStateOf(background, structuralEqualityPolicy())
+        internal set
+
+    var onSurface by mutableStateOf(onSurface, structuralEqualityPolicy())
+        internal set
+
+    var onSurfaceVariant1 by mutableStateOf(onSurfaceVariant1, structuralEqualityPolicy())
         internal set
 
     var lightThemeEnabled by mutableStateOf(lightThemeEnabled, structuralEqualityPolicy())
@@ -24,19 +57,35 @@ class GuardianColors(
 
     fun copy(
         primary: Color = this.primary,
-        lightThemeEnabled: Boolean = this.lightThemeEnabled
+        primaryVariant1: Color = this.primaryVariant1,
+        background: Color = this.background,
+        onSurface: Color = this.onSurface,
+        onSurfaceVariant1: Color = this.onSurfaceVariant1,
+        lightThemeEnabled: Boolean = this.lightThemeEnabled,
     ): GuardianColors = GuardianColors(
         primary,
+        primaryVariant1,
+        background,
+        onSurface,
+        onSurfaceVariant1,
         lightThemeEnabled,
     )
 }
 
 internal fun guardianLightColors(): GuardianColors = GuardianColors(
-    primary = Color.ExampleColor1,
+    primary = Color.MineShaft,
+    primaryVariant1 = Color.MineShaft,
+    background = Color.Gallery,
+    onSurface = Color.LightGray,
+    onSurfaceVariant1 = Color.Alto,
     lightThemeEnabled = true
 )
 
 internal fun guardianDarkColors(): GuardianColors = GuardianColors(
-    primary = Color.ExampleColor2,
+    primary = Color.PhilippineGray,
+    primaryVariant1 = Color.Alto,
+    background = Color.MineShaftLight,
+    onSurface = Color.LightGray,
+    onSurfaceVariant1 = Color.MineShaft,
     lightThemeEnabled = false
 )
