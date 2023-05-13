@@ -1,0 +1,17 @@
+<resources>
+    // Application
+    <string name="app_name">Guardian</string>
+
+    // Navigation bar destinations
+    <string name="bottom_navigation_item_home">Угрозы</string>
+    <string name="bottom_navigation_item_settings">Настройки</string>
+
+    // Threat screen
+    <string name="threat_screen_headline">Угрозы</string>
+
+    // Threat details screen
+    <string name="threat_details_full_description_section_title">Описание:</string>
+    <string name="threat_details_threat_sources_section_title">Источники:</string>
+    <string name="threat_details_threat_consequence_section_title">Последствия:</string>
+    <string name="threat_details_objects_of_influence_section_title">Объекты влияния:</string>
+</resources>
