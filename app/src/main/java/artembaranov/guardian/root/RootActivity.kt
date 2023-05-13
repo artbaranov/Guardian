@@ -64,13 +64,13 @@ class RootActivity : ComponentActivity() {
 
                 Scaffold(
                     bottomBar = {
-                        AnimatedVisibility(
-                            visible = bottomBarVisible.value,
-                            enter = slideInVertically(initialOffsetY = { it }),
-                            exit = slideOutVertically(targetOffsetY = { it }),
-                        ) {
-                            BottomNavigationBar(navController = navController, navigationItems = items)
-                        }
+//                        AnimatedVisibility(
+//                            visible = bottomBarVisible.value,
+//                            enter = slideInVertically(initialOffsetY = { it }),
+//                            exit = slideOutVertically(targetOffsetY = { it }),
+//                        ) {
+//                            BottomNavigationBar(navController = navController, navigationItems = items)
+//                        }
                     }
                 ) { innerPadding ->
                     NavHost(navController, startDestination = Screen.Home.route, Modifier.padding(innerPadding)) {

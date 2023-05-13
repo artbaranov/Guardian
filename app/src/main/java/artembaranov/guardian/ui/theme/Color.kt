@@ -1,42 +1,39 @@
 package artembaranov.guardian.ui.theme
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.graphics.Color
 
-@Stable
-val Color.Companion.ExampleColor1: Color
-    get() = Color(0xFF008493)
-
-@Stable
-val Color.Companion.ExampleColor2: Color
-    get() = Color(0xFF21DCD9)
 
 @Stable
 class GuardianColors(
-    primary: Color,
+    onSurface: Color,
     lightThemeEnabled: Boolean
 ) {
-    var primary by mutableStateOf(primary, structuralEqualityPolicy())
+    var onSurface by mutableStateOf(onSurface, structuralEqualityPolicy())
         internal set
 
     var lightThemeEnabled by mutableStateOf(lightThemeEnabled, structuralEqualityPolicy())
         internal set
 
     fun copy(
-        primary: Color = this.primary,
-        lightThemeEnabled: Boolean = this.lightThemeEnabled
+        onSurface: Color = this.onSurface,
+        lightThemeEnabled: Boolean = this.lightThemeEnabled,
     ): GuardianColors = GuardianColors(
-        primary,
+        onSurface,
         lightThemeEnabled,
     )
 }
 
 internal fun guardianLightColors(): GuardianColors = GuardianColors(
-    primary = Color.ExampleColor1,
+    onSurface = Color.Gray,
     lightThemeEnabled = true
 )
 
 internal fun guardianDarkColors(): GuardianColors = GuardianColors(
-    primary = Color.ExampleColor2,
+    onSurface = Color.LightGray,
     lightThemeEnabled = false
 )

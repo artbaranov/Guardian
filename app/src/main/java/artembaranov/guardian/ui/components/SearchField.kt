@@ -5,7 +5,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,6 +22,7 @@ fun SearchField(
     modifier: Modifier = Modifier,
     onTextChanged: (String) -> Unit
 ) {
+
     TextField(
         modifier = modifier
             .clip(RoundedCornerShape(35.dp)),
@@ -32,7 +32,7 @@ fun SearchField(
             Icon(imageVector = Icons.Default.Search, contentDescription = null)
         },
         leadingIcon = {
-            Icon(imageVector = Icons.Default.Menu, contentDescription = null)
+            DropDownMenu()
         },
         singleLine = true,
         maxLines = 1,
