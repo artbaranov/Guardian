@@ -51,7 +51,6 @@ class HomeViewModel @Inject constructor(
     }
 
     fun applyFilters(filter: Filter) {
-
         val filters = uiState.filters.toMutableList()
         val filterBeingSelected = filters.find { it == filter }
         val filterBeingSelectedIndex = filters.indexOf(filterBeingSelected)
