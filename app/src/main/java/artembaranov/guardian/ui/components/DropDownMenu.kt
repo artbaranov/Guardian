@@ -6,11 +6,14 @@ import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
-import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.Checkbox
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -24,8 +27,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.unit.dp
+import artembaranov.guardian.ui.screens.home.Filter
 import artembaranov.guardian.ui.theme.GuardianTheme
 
 /**
@@ -33,7 +37,11 @@ import artembaranov.guardian.ui.theme.GuardianTheme
  */
 
 @Composable
-fun DropDownMenu(modifier: Modifier = Modifier) {
+fun DropDownMenu(
+    modifier: Modifier = Modifier,
+    filters: List<Filter>,
+    onFilterApplied: (Filter) -> Unit
+) {
     var expanded by remember { mutableStateOf(false) }
 
     Box(
@@ -48,12 +56,23 @@ fun DropDownMenu(modifier: Modifier = Modifier) {
         }
 
         DropdownMenu(
-            modifier = Modifier.width(80.dp),
+            modifier = Modifier.width(300.dp),
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
-            Item(expanded = true)
+            filters.forEach {
+                A(filter = it, onFilterApplied = onFilterApplied)
+            }
         }
+    }
+}
+
+@Composable
+private fun A(modifier: Modifier = Modifier, filter: Filter, onFilterApplied: (Filter) -> Unit) {
+    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
+        Checkbox(checked = filter.applied, onCheckedChange = { onFilterApplied(filter) })
+
+        Text(text = filter.name)
     }
 }
 
@@ -88,8 +107,7 @@ private fun Item(
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.Black),
+                .fillMaxWidth(),
         ) {
             Text(text = "A")
             Text(text = "A")

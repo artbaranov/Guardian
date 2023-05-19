@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import artembaranov.guardian.ui.screens.home.Filter
 import artembaranov.guardian.ui.theme.GuardianTheme
 
 /**
@@ -19,9 +20,11 @@ import artembaranov.guardian.ui.theme.GuardianTheme
 
 @Composable
 fun SearchField(
-    text: String,
     modifier: Modifier = Modifier,
-    onTextChanged: (String) -> Unit
+    text: String,
+    filters: List<Filter>,
+    onTextChanged: (String) -> Unit,
+    onFilterApplied: (Filter) -> Unit,
 ) {
 
     TextField(
@@ -36,7 +39,7 @@ fun SearchField(
             )
         },
         leadingIcon = {
-            DropDownMenu()
+            DropDownMenu(filters = filters, onFilterApplied = onFilterApplied)
         },
         singleLine = true,
         maxLines = 1,

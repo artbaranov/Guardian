@@ -27,7 +27,8 @@ fun Home(
 
     val uiFlow = UiFlow(
         onThreatClicked = onThreatClicked,
-        onSearchQueryChanged = viewModel::updateSearchQuery
+        onSearchQueryChanged = viewModel::updateSearchQuery,
+        onFilterApplied = viewModel::applyFilters
     )
 
     HomeImpl(
@@ -58,7 +59,9 @@ fun HomeImpl(
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp, vertical = 30.dp),
             text = uiState.searchQuery,
-            onTextChanged = uiFlow.onSearchQueryChanged
+            filters = uiState.filters,
+            onTextChanged = uiFlow.onSearchQueryChanged,
+            onFilterApplied = uiFlow.onFilterApplied
         )
 
         val searchQuery = uiState.searchQuery
@@ -78,4 +81,5 @@ fun HomeImpl(
 data class UiFlow(
     val onSearchQueryChanged: (String) -> Unit = {},
     val onThreatClicked: (Threat) -> Unit = {},
+    val onFilterApplied: (Filter) -> Unit = {},
 )
