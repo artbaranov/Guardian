@@ -88,8 +88,7 @@ private fun Item(
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.Black),
+                .fillMaxWidth(),
         ) {
             Text(text = "A")
             Text(text = "A")
