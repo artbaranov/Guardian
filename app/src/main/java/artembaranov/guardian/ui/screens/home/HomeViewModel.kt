@@ -9,7 +9,7 @@ import artembaranov.guardian.di.IODispatcher
 import artembaranov.guardian.di.MainDispatcher
 import artembaranov.guardian.entities.Threat
 import artembaranov.guardian.repositories.ThreatRepository
-import artembaranov.guardian.utils.TableReader
+import artembaranov.guardian.models.TableReader
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch

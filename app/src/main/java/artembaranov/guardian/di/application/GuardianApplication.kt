@@ -1,4 +1,4 @@
-package artembaranov.guardian.application
+package artembaranov.guardian.di.application
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

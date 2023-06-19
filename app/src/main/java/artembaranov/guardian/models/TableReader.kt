@@ -1,4 +1,4 @@
-package artembaranov.guardian.utils
+package artembaranov.guardian.models
 
 import android.content.Context
 import artembaranov.guardian.entities.ObjectOfInfluence

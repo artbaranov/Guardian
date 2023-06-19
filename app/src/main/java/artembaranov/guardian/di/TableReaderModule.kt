@@ -1,7 +1,7 @@
 package artembaranov.guardian.di
 
-import artembaranov.guardian.utils.ExcelReader
-import artembaranov.guardian.utils.TableReader
+import artembaranov.guardian.models.ExcelReader
+import artembaranov.guardian.models.TableReader
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

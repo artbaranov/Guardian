@@ -1,4 +1,4 @@
-package artembaranov.guardian.root
+package artembaranov.guardian.ui.root
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
