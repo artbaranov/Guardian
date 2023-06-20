@@ -41,7 +41,7 @@ fun Home(
 @Composable
 fun HomeImpl(
     modifier: Modifier,
-    uiState: HomeViewModel.UiState = HomeViewModel.UiState(),
+    uiState: HomeViewModel.UiState,
     uiFlow: UiFlow = UiFlow(),
 ) {
     val focusManager = LocalFocusManager.current

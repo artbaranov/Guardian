@@ -26,17 +26,7 @@ class HomeViewModel @Inject constructor(
         val threats: List<Threat> = emptyList(),
         val foundThreats: List<Threat> = emptyList(),
         val searchQuery: String = "",
-        val filters: List<Filter> = listOf(
-            Filter(1, "Внутренний нарушитель с низким потенциалом", false),
-            Filter(2, "Внутренний нарушитель со средним потенциалом", false),
-            Filter(3, "Внутренний нарушитель с высоким потенциалом", false),
-            Filter(4, "Внешний нарушитель с низким потенциалом", false),
-            Filter(5, "Внешний нарушитель с средним потенциалом", false),
-            Filter(6, "Внешний нарушитель с высоким потенциалом", false),
-            Filter(7, "Нарушение конфиденциальности", false),
-            Filter(8, "Нарушение целостности", false),
-            Filter(9, "Нарушение доступности", false),
-        )
+        val filters: List<Filter> = emptyList()
     )
 
     var uiState by mutableStateOf(UiState())
@@ -47,6 +37,22 @@ class HomeViewModel @Inject constructor(
             updateRepository()
 
             loadThreats()
+
+            viewModelScope.launch(uiDispatcher) {
+                uiState = uiState.copy(
+                    filters = listOf(
+                        Filter(1, "Внутренний нарушитель с низким потенциалом", false),
+                        Filter(2, "Внутренний нарушитель со средним потенциалом", false),
+                        Filter(3, "Внутренний нарушитель с высоким потенциалом", false),
+                        Filter(4, "Внешний нарушитель с низким потенциалом", false),
+                        Filter(5, "Внешний нарушитель с средним потенциалом", false),
+                        Filter(6, "Внешний нарушитель с высоким потенциалом", false),
+                        Filter(7, "Нарушение конфиденциальности", false),
+                        Filter(8, "Нарушение целостности", false),
+                        Filter(9, "Нарушение доступности", false),
+                    )
+                )
+            }
         }
     }
 
@@ -61,7 +67,9 @@ class HomeViewModel @Inject constructor(
             filters[filterBeingSelectedIndex] = updatedFilter
         }
 
-        uiState = uiState.copy(filters = filters)
+        viewModelScope.launch(uiDispatcher) {
+            uiState = uiState.copy(filters = filters)
+        }
     }
 
     fun updateSearchQuery(query: String) {
